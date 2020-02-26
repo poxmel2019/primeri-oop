@@ -10,25 +10,21 @@ namespace primeri_oop
     }
     class User : Examples
     {
-        private int scores = 0;
+        private int _scores = 0;
         public int Scores
         {
             get
             {
-                Console.WriteLine("User answer: ");
-                return scores;
+                Console.WriteLine("User scores: ");
+                return _scores;
             }
             set
             {
-
+                _scores = value;
             }
 
         }
-       //public int getScores()
-       // {
-       //     //Console.WriteLine("User answer: ");
-       //     return scores;
-       // }
+       
 
         public int userRightAnswersAmount = 0;
 
@@ -36,7 +32,7 @@ namespace primeri_oop
         int[] userAnswers = new int[5];
         public User()
         {
-            scores = 0;
+            Scores = 0;
             
             
         }
@@ -55,7 +51,7 @@ namespace primeri_oop
             }
             if (userRightAnswersAmount == exercises.Length)
             {
-                scores++;
+                Scores++;
             }
             
         }
@@ -67,7 +63,7 @@ namespace primeri_oop
         static void Main(string[] args)
         {
             User me = new User();
-            Console.WriteLine(me.Scores);
+            //Console.WriteLine(me.Scores);
             me.SolveExercises();
             Console.WriteLine(me.Scores);
 
