@@ -35,9 +35,11 @@ namespace primeri_oop
        
 
         public int userRightAnswersAmount = 0;
+        public string[] userWork = new string[4];
 
         string userAnswer = null;
         int[] userAnswers = new int[5];
+        string correctness;
         public User()
         {
             _scores = 0;
@@ -51,7 +53,7 @@ namespace primeri_oop
             {
                 while (true)
                 {
-                    Console.WriteLine(exercises[i]);
+                    Console.WriteLine($"{i+1}) {exercises[i]} = ");
                     try
                     {
                         userAnswer = Console.ReadLine();
@@ -60,7 +62,13 @@ namespace primeri_oop
                         if (userAnswers[i] == rightAnswers[i])
                         {
                             userRightAnswersAmount++;
+                            correctness = "Correct";
                         }
+                        else
+                        {
+                            correctness = $"Wrong. Right answer is {rightAnswers[i]}";
+                        }
+                        userWork[i] = $"{i+1}) {exercises[i]} = {userAnswers[i]}. {correctness}";
                         break;
                     }
                     catch (FormatException)
@@ -86,9 +94,62 @@ namespace primeri_oop
             {
                 _scores++;
             }
-            
+            AskFromUser();
+            AskAgain();
         }
 
+        public void ShowWork()
+        {
+            foreach (string el in userWork)
+            {
+                Console.WriteLine(el);
+            }
+            Console.WriteLine($"Amount of right answers {userRightAnswersAmount}");
+            Console.WriteLine($"Amount of wrong answers {exercises.Length - userRightAnswersAmount}");
+
+        }
+
+        public void AskFromUser()
+        {
+            string[] positiveOptions = {};
+            while (true)
+            {
+                Console.WriteLine("Do you want to show your work?");
+                string userDecision = Console.ReadLine();
+                if (userDecision == "y")
+                {
+                    ShowWork();
+                    break;
+                }
+                else if (userDecision == "n")
+                {
+                    break;
+                }
+            }
+        }
+
+        public void AskAgain()
+        {
+            Console.WriteLine("Do you want to try again?");
+            string userDecision = Console.ReadLine();
+            while (true)
+            {
+
+                if (userDecision == "y")
+                {
+                    SolveExercises();
+                    break;
+
+                }
+                else if (userDecision == "n")
+                {
+                    Console.WriteLine("Buy!");
+                    break;
+                }
+            }
+            
+        }
+         
         
     }
     class Program
